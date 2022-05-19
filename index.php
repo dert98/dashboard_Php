@@ -20,40 +20,23 @@
 		<div class="row col-md-12" style="height: 490px">
 			<div class="col-md-2 bg-dark text-light">
 				<label class="m-2">Sección</label>
-					<li> <a href="index.php?web=General">General</a></li>
-					<li> <a href="index.php?web=LANDiscover">LAN Discover</a></li>
-					<li> <a href="index.php?web=Ipconfig"> IpConfig</a></li>
-					<li> <a href="index.php?web=4"> Pag. 4</a></li>
-					<li> <a href="index.php?web=5"> Pag. 5</a></li>
-					<li> <a href="index.php?web=6"> Pag. 6</a></li>
+				<?php
+					$webs = array("General", "LANDiscover", "Ipconfig","casa","5");
+					foreach ($webs as $web) {
+						echo '<li> <a href="index.php?web='.$web.'">'.$web.'</a></li>';
+					}
+				?>
 			</div>
 			<div class="col-md-10 bg-info">
 				<div class="">
 					<?php
-						if (isset($_GET['web'])){
-							echo '<p class="text-center h3"><label>';
-							echo $_GET['web'];
-							echo '</label></p>';
-							$nombre = $_GET['web'];
-							if ($_GET['web'] == "") {
-								require("intro.php");
-							}
-							if ($_GET['web'] == "General") {
-								require("web1.php");
-							}
-							if ($_GET['web'] == "LANDiscover") {
-								require("web2.php");
-							}
-							if ($_GET['web'] == "Ipconfig") {
-								require("web3.php");
-							}
-						}else{
+						if (!isset($_GET['web'])){
 							$_GET['web'] = "Intro";
-							echo '<p class="text-center h3"><label>';
-							echo $_GET['web'];
-							echo '</label></p>';
-							require("intro.php");
 						}
+						echo '<p class="text-center h3"><label>';
+						echo $_GET['web'];
+						echo '</label></p>';
+						require($_GET['web'].".php");
 					?>
 				</div>
 			</div>
